@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/assets/index-CJm5mPc8.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-De3fXUym.css">
+  <script type="module" crossorigin src="/assets/index-CIgF6rVy.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CVs2Urng.css">
 </head>
 <body>
   <!-- Ambient background glow behind the canvas -->
@@ -66,7 +66,7 @@
         </div>
         <div id="video-file-info" class="video-file-info hidden">
           <span class="file-name">filename.mp4</span>
-          <button id="btn-remove-video" title="Remove video">✕</button>
+          <button id="btn-remove-video" title="Remove video" aria-label="Remove uploaded video file">✕</button>
         </div>
       </div>
     </div>
@@ -79,14 +79,28 @@
       </h3>
       
       <div class="control-group">
+        <label for="select-preset">Visual Preset</label>
+        <div class="select-wrapper">
+          <select id="select-preset" aria-label="Select visual preset combo">
+            <option value="" disabled selected>Select a Preset...</option>
+            <option value="calmAurora">Calm Aurora (Rainbow Trails)</option>
+            <option value="raveParticles">Rave Particles (Neon Dust)</option>
+            <option value="cyberMatrix">Cyber Matrix (Matrix Code)</option>
+            <option value="veiledEmerald">Veiled Emerald (Liquid Film)</option>
+            <option value="goldenGhost">Golden Ghost (Hologram)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
         <label for="select-mode">Render Mode</label>
         <div class="select-wrapper">
-          <select id="select-mode">
+          <select id="select-mode" aria-label="Select rendering visual mode">
             <option value="particles">Neon Dust (Particles)</option>
             <option value="hologram">Ghostly Hologram</option>
             <option value="trails">Rainbow Trails</option>
             <option value="matrix">Matrix Code</option>
-            <option value="cloth">Veiled Sheet (Liquid Cloth)</option>
+            <option value="cloth">Veiled Sheet (Liquid Film)</option>
           </select>
         </div>
       </div>
@@ -94,7 +108,7 @@
       <div class="control-group">
         <label for="select-theme">Color Theme</label>
         <div class="select-wrapper">
-          <select id="select-theme">
+          <select id="select-theme" aria-label="Select color palette theme">
             <option value="cyberpunk">Cyberpunk (Cyan / Magenta)</option>
             <option value="synthwave">Synthwave (Pink / Purple)</option>
             <option value="aurora">Aurora (Teal / Purple)</option>
@@ -144,10 +158,16 @@
 
     <!-- Section 4: Action Controls -->
     <div class="panel-section footer-actions">
-      <button id="btn-snapshot" class="action-btn glow-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        Capture Snapshot
-      </button>
+      <div class="action-buttons-row">
+        <button id="btn-snapshot" class="secondary-btn" aria-label="Capture Canvas PNG Snapshot">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          Snapshot
+        </button>
+        <button id="btn-record" class="glow-btn" aria-label="Record Video Clip">
+          <span class="record-dot"></span>
+          <span id="record-btn-text">Record</span>
+        </button>
+      </div>
 
       <!-- Video Control Bar (Shown only when playing video) -->
       <div id="video-controls" class="video-playback-controls hidden">
@@ -193,10 +213,10 @@
   </div>
 
   <!-- Help floating widget -->
-  <button id="btn-help" class="help-toggle" title="Show Help Instructions">?</button>
+  <button id="btn-help" class="help-toggle" title="Show Help Instructions" aria-label="Show Help Instructions">?</button>
   <div id="overlay-help" class="help-modal hidden">
     <div class="glass-card help-card">
-      <button id="btn-close-help" class="close-btn">✕</button>
+      <button id="btn-close-help" class="close-btn" aria-label="Close Help Instructions">✕</button>
       <h3>How It Works</h3>
       <ul>
         <li><strong>Stay Still</strong>: The canvas will slowly fade to black. When there is no movement, you cannot figure out what is in front of the lens.</li>

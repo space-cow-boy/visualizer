@@ -23,7 +23,7 @@
   --accent-purple: #bd00ff;
   --accent-green: #39ff14;
   --accent-amber: #ffaa00;
-  
+
   /* Active Accent (Default is Cyan) */
   --accent-glow: var(--accent-cyan);
   --accent-glow-rgb: 0, 240, 255;
@@ -32,7 +32,7 @@
   --sidebar-width: 360px;
   --panel-radius: 20px;
   --control-radius: 12px;
-  
+
   /* Shadow Systems */
   --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 15px rgba(var(--accent-glow-rgb), 0.35);
@@ -65,7 +65,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: -2;
-  background: 
+  background:
     radial-gradient(circle at 10% 20%, rgba(189, 0, 255, 0.06) 0%, transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.06) 0%, transparent 40%);
   animation: floatGlow 25s ease-in-out infinite alternate;
@@ -76,6 +76,7 @@ body {
   0% {
     background-position: 0% 0%;
   }
+
   100% {
     background-position: 100% 100%;
   }
@@ -172,6 +173,7 @@ body {
 .sidebar-panel::-webkit-scrollbar {
   width: 4px;
 }
+
 .sidebar-panel::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
@@ -257,7 +259,7 @@ body {
   color: #fff;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--border-glass-active);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .tab-icon {
@@ -281,7 +283,8 @@ body {
   transition: all 0.25s ease;
 }
 
-.upload-zone:hover, .upload-zone.dragover {
+.upload-zone:hover,
+.upload-zone.dragover {
   border-color: var(--accent-glow);
   background: rgba(var(--accent-glow-rgb), 0.03);
   box-shadow: inset 0 0 10px rgba(var(--accent-glow-rgb), 0.05);
@@ -686,10 +689,13 @@ input[type="range"]::-moz-range-thumb:hover {
 }
 
 @keyframes pulseIcon {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     filter: drop-shadow(0 0 2px var(--accent-glow));
   }
+
   50% {
     transform: scale(1.08);
     filter: drop-shadow(0 0 10px var(--accent-glow));
@@ -774,7 +780,7 @@ input[type="range"]::-moz-range-thumb:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 150;
@@ -871,29 +877,65 @@ input[type="range"]::-moz-range-thumb:hover {
 
 /* Animation Declarations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideDown {
-  from { transform: translateY(-10px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { transform: translateY(10px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes zoomIn {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-6px);
+  }
+
+  75% {
+    transform: translateX(6px);
+  }
 }
 
 /* Responsive Styles */
@@ -905,11 +947,11 @@ input[type="range"]::-moz-range-thumb:hover {
     bottom: auto;
     pointer-events: none;
   }
-  
+
   .logo {
     display: inline-flex;
   }
-  
+
   .sidebar-panel {
     top: auto;
     left: 20px;
@@ -919,8 +961,9 @@ input[type="range"]::-moz-range-thumb:hover {
     height: 380px;
     border-radius: var(--panel-radius);
   }
-  
+
   .help-toggle {
-    display: none; /* Hide floating help icon on mobile to avoid overlap */
+    display: none;
+    /* Hide floating help icon on mobile to avoid overlap */
   }
 }

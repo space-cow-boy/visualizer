@@ -65,7 +65,7 @@ class AppState {
     if (this.settings[key] === value) return;
     const prevValue = this.settings[key];
     this.settings[key] = value;
-    
+
     eventBus.publish(`settings:${key}`, value);
     eventBus.publish('settings:change', { key, value, prevValue });
   }

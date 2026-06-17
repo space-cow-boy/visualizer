@@ -66,8 +66,8 @@ export class MatrixRenderer extends RendererInterface {
       const colData = this.matrixGrid[c];
       
       // Update vertical waterfall head position
-      // Frame rate locked speed was speed * 0.45. Scaling with dt: 27 * dt (since 27 * 0.0166 ~= 0.45)
-      const step = dt ? colData.speed * 27 * dt : colData.speed * 0.45;
+      // Frame rate decoupled speed based on 60fps baseline
+      const step = colData.speed * 27 * dt;
       colData.y += step;
       if (colData.y >= this.matrixRows) {
         colData.y = -5;
@@ -82,8 +82,7 @@ export class MatrixRenderer extends RendererInterface {
         
         // Slowly decay active grid cell heat over time
         if (colData.motionHeat[r] > 0) {
-          // Frame rate locked decay was decay * 0.35. Scaling with dt: decay * 0.35 * 60 * dt
-          const decayAmt = dt ? decay * 0.35 * 60 * dt : decay * 0.35;
+          const decayAmt = decay * 0.35 * 60 * dt;
           colData.motionHeat[r] -= decayAmt;
         }
         
@@ -106,8 +105,9 @@ export class MatrixRenderer extends RendererInterface {
             }
           }
 
-          // Randomize characters occasionally for digital feel
-          if (Math.random() < 0.02 * density) {
+          // Randomize characters occasionally for digital feel, scaled with dt
+          const changeChance = 1 - Math.pow(1 - 0.02 * density, 60 * dt);
+          if (Math.random() < changeChance) {
             colData.chars[r] = this.matrixChars[Math.floor(Math.random() * this.matrixChars.length)];
           }
 

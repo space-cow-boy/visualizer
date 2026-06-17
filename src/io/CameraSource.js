@@ -16,33 +16,33 @@ export class CameraSource {
     eventBus.publish('toast', { message: 'Initializing camera stream...' });
 
     return navigator.mediaDevices.getUserMedia({
-      video: { 
-        width: { ideal: 1280 }, 
+      video: {
+        width: { ideal: 1280 },
         height: { ideal: 720 },
         facingMode: 'user'
       },
       audio: false
     })
-    .then((stream) => {
-      this.cameraStream = stream;
-      this.videoElement.srcObject = stream;
-      
-      return new Promise((resolve) => {
-        this.videoElement.onloadedmetadata = () => {
-          this.videoElement.play();
-          this.streamActive = true;
-          eventBus.publish('camera:active', stream);
-          eventBus.publish('toast', { message: 'Camera stream active' });
-          resolve(stream);
-        };
+      .then((stream) => {
+        this.cameraStream = stream;
+        this.videoElement.srcObject = stream;
+
+        return new Promise((resolve) => {
+          this.videoElement.onloadedmetadata = () => {
+            this.videoElement.play();
+            this.streamActive = true;
+            eventBus.publish('camera:active', stream);
+            eventBus.publish('toast', { message: 'Camera stream active' });
+            resolve(stream);
+          };
+        });
+      })
+      .catch((err) => {
+        console.error("Camera permissions error:", err);
+        eventBus.publish('camera:error', err);
+        eventBus.publish('toast', { message: 'Failed to access camera', color: '#ff3366' });
+        throw err;
       });
-    })
-    .catch((err) => {
-      console.error("Camera permissions error:", err);
-      eventBus.publish('camera:error', err);
-      eventBus.publish('toast', { message: 'Failed to access camera', color: '#ff3366' });
-      throw err;
-    });
   }
 
   disable() {

@@ -18,25 +18,25 @@ export class Sidebar {
     this.uploadZone = document.getElementById('upload-zone');
     this.videoFileInfo = document.getElementById('video-file-info');
     this.btnRemoveVideo = document.getElementById('btn-remove-video');
-    
+
     this.selectMode = document.getElementById('select-mode');
     this.selectTheme = document.getElementById('select-theme');
-    
+
     this.sliderSensitivity = document.getElementById('slider-sensitivity');
     this.sliderDecay = document.getElementById('slider-decay');
     this.sliderDensity = document.getElementById('slider-density');
-    
+
     this.valSensitivity = document.getElementById('val-sensitivity');
     this.valDecay = document.getElementById('val-decay');
     this.valDensity = document.getElementById('val-density');
-    
+
     this.btnSnapshot = document.getElementById('btn-snapshot');
     this.videoControls = document.getElementById('video-controls');
     this.btnPlayPause = document.getElementById('btn-play-pause');
     this.btnMute = document.getElementById('btn-mute');
     this.videoProgressContainer = document.getElementById('video-progress-container');
     this.videoProgressFill = document.getElementById('video-progress-fill');
-    
+
     this.iconPlay = document.getElementById('icon-play');
     this.iconPause = document.getElementById('icon-pause');
     this.iconVolume = document.getElementById('icon-volume');
@@ -51,7 +51,7 @@ export class Sidebar {
     // File Drag & Drop
     this.uploadZone.addEventListener('click', () => this.videoInput.click());
     this.videoInput.addEventListener('change', (e) => this.videoSource.handleFile(e.target.files[0]));
-    
+
     this.uploadZone.addEventListener('dragover', (e) => {
       e.preventDefault();
       this.uploadZone.classList.add('dragover');
@@ -120,7 +120,7 @@ export class Sidebar {
       this.videoFileInfo.classList.remove('hidden');
       this.videoFileInfo.querySelector('.file-name').textContent = data.name;
       this.videoControls.classList.remove('hidden');
-      
+
       this.iconPlay.classList.add('hidden');
       this.iconPause.classList.remove('hidden');
     });
@@ -158,24 +158,24 @@ export class Sidebar {
 
   handleSourceChange(source) {
     if (appState.getSetting('source') === source) return;
-    
+
     appState.setSetting('source', source);
-    
+
     if (source === 'camera') {
       this.btnCamera.classList.add('active');
       this.btnVideo.classList.remove('active');
       this.videoUploadArea.classList.add('hidden');
       this.videoControls.classList.add('hidden');
-      
+
       this.videoSource.pause();
-      this.cameraSource.enable().catch(() => {});
+      this.cameraSource.enable().catch(() => { });
     } else {
       this.btnVideo.classList.add('active');
       this.btnCamera.classList.remove('active');
       this.videoUploadArea.classList.remove('hidden');
-      
+
       this.cameraSource.disable();
-      
+
       if (this.videoSource.isLoaded()) {
         this.videoControls.classList.remove('hidden');
         this.videoSource.play();

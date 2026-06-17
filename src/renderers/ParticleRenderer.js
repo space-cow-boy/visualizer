@@ -22,7 +22,9 @@ export class ParticleRenderer extends RendererInterface {
 
     // Spawn new particles from motion points
     if (motionPoints && motionPoints.length > 0) {
-      const spawnChance = 0.08 * density;
+      // Scale spawn chance with dt to maintain constant density per second
+      const baseSpawnChance = 0.08 * density;
+      const spawnChance = 1 - Math.pow(1 - baseSpawnChance, 60 * dt);
       
       motionPoints.forEach(point => {
         if (Math.random() < spawnChance && this.particles.length < this.maxParticles) {
@@ -52,9 +54,10 @@ export class ParticleRenderer extends RendererInterface {
     
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.alpha -= p.decay;
+      // Scale velocity and decay from 60fps baseline
+      p.x += p.vx * 60 * dt;
+      p.y += p.vy * 60 * dt;
+      p.alpha -= p.decay * 60 * dt;
 
       if (p.alpha <= 0) {
         this.particles.splice(i, 1);
